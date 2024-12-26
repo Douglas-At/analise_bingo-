@@ -1,0 +1,1 @@
+#sortear 1 numero de 1 a 75  e verificar em 29 das possíveis cartelas criadas
