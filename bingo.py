@@ -8,7 +8,7 @@ class CartelaBingo:
         self.cartela = {"B":[],"I":[],"N":[],"G":[],"O":[]}
         self.cartela_falsa = {chave: [False] * 5 for chave in ["B", "I", "N", "G", "O"]}
         self.cartela_falsa["N"][2] = True
-        
+        self.criar_cartela()
 
     def criar_cartela(self):
         self.cartela["B"] = random.sample(range(1, 16), 5)
@@ -33,7 +33,7 @@ class CartelaBingo:
         return "\n".join(resultado)
     
     def preencher(self,sorteado):
-        div = math.floor((sorteado-1)/16)
+        div = math.floor((sorteado-1)/15)
         try:
             index = self.cartela["BINGO"[div]].index(sorteado) 
             self.cartela_falsa["BINGO"[div]][index] = True
@@ -43,10 +43,6 @@ class CartelaBingo:
 
 
 class VerificadorBingo():
-
-    def __init__(self, cartela):
-        self.cartela_falsa = cartela.cartela_falsa
-
 
     def linha(self, linha_index):
         for coluna in self.cartela_falsa.values():
@@ -61,48 +57,29 @@ class VerificadorBingo():
                 return False
         return True
 
-    def diagonal(self):
+    def diagonal(self, cartela_falsa):
         diagonal1 = all(
-            self.cartela_falsa[coluna][i] is True for i, coluna in enumerate("BINGO")
+            cartela_falsa[coluna][i] is True for i, coluna in enumerate("BINGO")
         )
         diagonal2 = all(
-            self.cartela_falsa[coluna][4 - i] is True for i, coluna in enumerate("BINGO")
+            cartela_falsa[coluna][4 - i] is True for i, coluna in enumerate("BINGO")
         )
         return diagonal1 or diagonal2
 
-    def cheia(self):
-        for coluna in self.cartela_falsa.values():
-            for valor in coluna:
-                if valor is not True:  
-                    return False
-        return True
-
-    def verificar_vitoria(self):
-        ganho = False
-        for i in range(5):
-            ganho = self.linha(i)
-            if ganho:
-                return True
-        for i in 'BINGO':
-            ganho = self.coluna(i)
-            if ganho:
-                return True
-
-
-
-        
-
+    def cheia(self,cartela:CartelaBingo):
+        return   all(all(value_list) for value_list in cartela.cartela_falsa.values())
 
 
 if __name__ == "__main__":
     a = CartelaBingo()
-    a.criar_cartela()
-    vb = VerificadorBingo(a)
+    
+    vb = VerificadorBingo()
     print(a)
     for i in range(76):
         j = int(input("valor sorteado"))
         a.preencher(j)
-        if vb.verificar_vitoria():
+        print(a.cartela_falsa)
+        if vb.cheia(a):
             print("ganhou")
             break
 
