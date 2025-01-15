@@ -14,7 +14,7 @@ print(total)
 plt.scatter(x, y, color='blue', marker='o')
 
 # Add labels and a title
-plt.xlabel('X-axis')
-plt.ylabel('Y-axis')
-plt.title('Simple Scatter Plot')
+plt.ylabel('P(X)')
+plt.xlabel('Nº Bolas')
+plt.title('´Distribuição hipergeométrica')
 plt.show()

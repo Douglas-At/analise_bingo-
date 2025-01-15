@@ -74,7 +74,7 @@ if __name__ == "__main__":
     a = CartelaBingo()
     
     vb = VerificadorBingo()
-    print(a)
+    
     for i in range(76):
         j = int(input("valor sorteado"))
         a.preencher(j)

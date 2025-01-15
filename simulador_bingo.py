@@ -27,8 +27,8 @@ def simular_bingo(numero_jogos):
             return row
 
 linhas = []
-n = 10000
-p = 1000
+n = 1000
+p = 29
 for i in range(n):
     linhas.append(simular_bingo(p))
 
