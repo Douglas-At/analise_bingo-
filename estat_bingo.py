@@ -10,6 +10,8 @@ for i in range(24,76):
     total += probabilidade
     y.append(probabilidade)
     
+print(y)
+quit()
 print(total)
 plt.scatter(x, y, color='blue', marker='o')
 
